@@ -48,11 +48,19 @@ frontend/src/api, stores, types, constants, constructors, components/common, hoo
 - 数据库使用命名卷，避免绑定中文路径。
 - 常见问题：端口占用时修改 `.env` 中端口后重启；需要重置数据时执行 `docker compose down -v`。
 
+## 审阅批次（冻结快照）
+
+- 在 `/compare` 版本对比页可将当前对比结果**冻结为审阅批次**：参与比较的两版条款内容、差异类型（DiffType）和风险等级（PrivacyRiskLevel）随批次一并快照；批次未关闭前，政策再导入或风险重标都不会改变批次内容。
+- 在 `/batches` 审阅批次页可逐条记录审阅意见和处理状态（ReviewStatus），并导出带冻结时版本与差异的 Markdown 摘要。
+- 批次关闭后内容只读，再次打开仍显示当时的冻结差异与审阅记录；`/compare` 的当前对比继续实时反映最新政策。
+- 批次与意见持久化在 localStorage：`policy-diff.review-batches`、`policy-diff.review-batch-notes`，首次访问时从 `mocks/seedData` 播种。
+
 ## 枚举/常量出现位置清单
 
-- DiffType: constants/DiffType、types/DiffType、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
-- PrivacyRiskLevel: constants/PrivacyRiskLevel、types/PrivacyRiskLevel、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
-- ReviewStatus: constants/ReviewStatus、types/ReviewStatus、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
+- DiffType: constants/DiffType、types/DiffType、constructors、logTemplates、errorMessages、筛选器（ComparePage）、展示组件/控制器均有引用。
+- PrivacyRiskLevel: constants/PrivacyRiskLevel、types/PrivacyRiskLevel、constructors、logTemplates、errorMessages、筛选器、展示组件（RiskTag）/控制器均有引用。
+- ReviewStatus: constants/ReviewStatus、types/ReviewStatus、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器（BatchesPage 意见表单）均有引用。
+- ReviewBatchStatus: constants/ReviewBatchStatus、types/ReviewBatchStatus、constants/statusText、utils/formatters（formatBatchStatus）、stores/ReviewBatchStore、pages/BatchesPage 均有引用。
 
 ## 为什么会牵一发动全身
 

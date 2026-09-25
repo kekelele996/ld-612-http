@@ -1,18 +1,33 @@
+import DocumentsPage from "../pages/DocumentsPage.vue";
+import ComparePage from "../pages/ComparePage.vue";
+import RisksPage from "../pages/RisksPage.vue";
+import ReviewPage from "../pages/ReviewPage.vue";
+import BatchesPage from "../pages/BatchesPage.vue";
+
 export const routes = [
   {
     "name": "文档导入",
-    "route": "/documents"
+    "route": "/documents",
+    "component": DocumentsPage
   },
   {
     "name": "版本对比",
-    "route": "/compare"
+    "route": "/compare",
+    "component": ComparePage
   },
   {
     "name": "风险标注",
-    "route": "/risks"
+    "route": "/risks",
+    "component": RisksPage
   },
   {
     "name": "审阅清单",
-    "route": "/review"
+    "route": "/review",
+    "component": ReviewPage
+  },
+  {
+    "name": "审阅批次",
+    "route": "/batches",
+    "component": BatchesPage
   }
 ] as const;
