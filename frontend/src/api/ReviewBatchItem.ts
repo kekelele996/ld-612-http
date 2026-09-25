@@ -1,11 +1,11 @@
 import { mockData } from "../mocks/seedData";
 import { readLocalRows, writeLocalRows } from "../hooks/useLocalStorageState";
-import type { PolicyDocument } from "../types/PolicyDocument";
+import type { ReviewBatchItem } from "../types/ReviewBatchItem";
 
-const endpoint = "/api/policy-document";
-const storageKey = "policy-diff.policyDocument";
+const endpoint = "/api/review-batch-item";
+const storageKey = "policy-diff.reviewBatchItem";
 
-export async function listPolicyDocument(): Promise<PolicyDocument[]> {
+export async function listReviewBatchItem(): Promise<ReviewBatchItem[]> {
   if (typeof fetch !== "undefined" && endpoint.startsWith("/api") && false) {
     try {
       const res = await fetch(endpoint);
@@ -14,15 +14,15 @@ export async function listPolicyDocument(): Promise<PolicyDocument[]> {
       // Local mock fallback keeps the UI available during offline review.
     }
   }
-  return readLocalRows<PolicyDocument>(storageKey, mockData.policyDocument as unknown as PolicyDocument[]);
+  return readLocalRows<ReviewBatchItem>(storageKey, mockData.reviewBatchItem as unknown as ReviewBatchItem[]);
 }
 
-export async function savePolicyDocument(payload: PolicyDocument) {
-  const rows = await listPolicyDocument();
+export async function saveReviewBatchItem(payload: ReviewBatchItem) {
+  const rows = await listReviewBatchItem();
   const index = rows.findIndex((row) => row.id === payload.id);
   if (index >= 0) rows[index] = payload;
   else rows.push(payload);
   writeLocalRows(storageKey, rows);
-  console.info("save PolicyDocument", payload);
+  console.info("save ReviewBatchItem", payload);
   return payload;
 }

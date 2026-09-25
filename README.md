@@ -2,6 +2,14 @@
 
 纯前端隐私政策版本对比与风险标注工具，用户粘贴两版文本后查看条款差异、风险标签和审阅清单，数据存 localStorage。
 
+## 审阅批次（冻结快照）
+
+- 在「版本对比」页选择新旧两版后，差异实时计算并始终反映最新政策；点击「冻结为审阅批次」可把当前差异连同两版条款内容、差异类型、风险等级拷贝固化成一个批次。
+- 批次未关闭前，政策再导入、条款再编辑、风险重标都只改 live 数据，不回写批次内容。
+- 在「审阅清单」页按批次逐条记录审阅意见与处理状态（OPEN / CONFIRMED / IGNORED / RESOLVED），可导出带冻结版本与差异的 Markdown 摘要。
+- 批次关闭后条目只读，再次打开仍看到冻结时的记录；当前对比页不受影响，继续反映最新政策。
+- 本地存储键：`policy-diff.reviewBatch`、`policy-diff.reviewBatchItem`（另有 `policyDocument` / `policySection`）。
+
 ## 快速启动
 
 ```bash
@@ -53,6 +61,7 @@ frontend/src/api, stores, types, constants, constructors, components/common, hoo
 - DiffType: constants/DiffType、types/DiffType、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
 - PrivacyRiskLevel: constants/PrivacyRiskLevel、types/PrivacyRiskLevel、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
 - ReviewStatus: constants/ReviewStatus、types/ReviewStatus、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
+- ReviewBatchStatus: constants/ReviewBatchStatus、types/ReviewBatchStatus、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
 
 ## 为什么会牵一发动全身
 
